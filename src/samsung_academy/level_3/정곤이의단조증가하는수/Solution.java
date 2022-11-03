@@ -2,7 +2,6 @@ package samsung_academy.level_3.정곤이의단조증가하는수;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 /*
     단조 증가 -> 각 숫자의 자릿수가 이전 자릿수 보다 증가하는 수

@@ -42,6 +42,8 @@ public class Solution {
             while (true) {
                 sb.append(" ").append(a.poll()).append(" ").append(b.poll());
 
+                // Queue a에는 값이 존재하고 Queue b에는 값이 존재하지 않을 때, Queue a 값만 sb에 추가한다.
+                // 그래야 Queue b의 null이 sb에 추가 되지 않는다.
                 if (a.size() > 0 && b.size() == 0)
                     sb.append(" ").append(a.poll());
 
