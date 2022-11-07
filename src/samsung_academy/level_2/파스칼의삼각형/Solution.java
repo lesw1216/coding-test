@@ -17,12 +17,23 @@ public class Solution {
 
             System.out.println("#" + tc);
 
-            ArrayList<Integer> list = new ArrayList<>();
-            list.add(1);
+            int[][] array = new int[N][N];
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j <= i; j++) {
+                    // 양 끝은 1, 처음은 1
+                    if (i == 0 || j == 0 || j == i)
+                        array[i][j] = 1;
+                    else {
+                        array[i][j] = array[i - 1][j - 1] + array[i - 1][j];
+                    }
+                }
+            }
 
-            for (int i = 1; i < N; i++) {
-                list.add(i);
-
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j <= i; j++) {
+                    System.out.print(array[i][j] + " ");
+                }
+                System.out.println();
             }
         }
     }
