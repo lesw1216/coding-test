@@ -1,65 +1,59 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
+        Student hong = new Student("홍길동", 20);
+        Student kim = new Student("김철수", 22);
+        Student choi = new Student("최치김", 35);
+        Student lee = new Student("이문복", 28);
+        Student jung = new Student("정순하", 50);
 
+        // 리스트에 학생 객체들 저장.
+        Student[] list = new Student[5];
+        list[0] = hong;
+        list[1] = jung;
+        list[2] = choi;
+        list[3] = lee;
+        list[4] = kim;
 
-        int N = 98254;
-        int k = 2;
-        double sqrt = Math.sqrt(N);
-        int count = 0;
-        System.out.println("sqrt = " + sqrt);
+        // 정렬 전
+        System.out.println(Arrays.toString(list));
 
-        for (int i = 1; i <= N; i++) {
-            if (N % i == 0)
-                System.out.print(i + " ");
-        }
-        System.out.println();
-
-        while (true) {
-            System.out.println("N = " + N);
-            count++;
-            if (N == 1)
-                break;
-
-            if (N % k == 0) {
-                System.out.print(k + " ");
-                N /= k;
-            } else {
-                k++;
+        Comparator<Student> comp = new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                if (o1.age > o2.age)
+                    return 1;
+                else if (o1.age == o2.age)
+                    return 0;
+                else
+                    return -1;
             }
-        }
-        System.out.println();
-        System.out.println("count = " + count);
+        };
 
-        System.out.println("============================================");
+        // 정렬
+        Arrays.sort(list, comp);
 
-        k = 2;
-        N = 98254;
-        count = 0;
-        while (true) {
-            count++;
-            if (N == 1 || k > sqrt) {
-                break;
-            }
+        // 정렬 후
+        System.out.println(Arrays.toString(list));
+    }
+}
 
-            if (N % k == 0) {
-                System.out.print(k + " ");
-                N /= k;
-            } else {
-                k++;
-            }
-        }
 
-        if (N > 1) {
-            // K의 값이 제곱근을 초과했을 때, N의 값이 1보다 클 수 있다.
-            System.out.print(N + " ");
-            System.out.println();
-            System.out.println("k = " + k);
-            System.out.println("N = " + N);
-        } else {
-            System.out.println("k = " + k);
-            System.out.println("N = " + N);
-        }
+class Student {
+    String name;
+    int age;
 
-        System.out.println("count = " + count);
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " " + this.age;
     }
 }
