@@ -1,6 +1,7 @@
 package baekjoon.그리디.보물;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Solution {
@@ -16,7 +17,7 @@ public class Solution {
         for (int i = 0; i < n; i++)
             b[i] = sc.nextInt();
 
-        Arrays.sort(a, (o1, o2) -> o2.compareTo(o1));
+        Arrays.sort(a, Comparator.reverseOrder());
         Arrays.sort(b);
 
         int sum = 0;

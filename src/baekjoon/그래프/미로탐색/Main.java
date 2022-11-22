@@ -66,7 +66,8 @@ public class Main {
 
                 if (map[nx][ny] == 1) {
                     q.offer(new Node(nx, ny));
-                    map[nx][ny] = map[x][y] + 1;
+                    map[nx][ny] = map[x][y] + 1; // 현재 xy자리 값을 1 더해준다면
+                    // 다음 자리에서 현재 자리를 탐색하지 않아도됨.
                 }
             }
         }

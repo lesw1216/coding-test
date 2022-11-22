@@ -28,6 +28,7 @@ public class Main {
             if (o1[1] == o2[1])
                 return o1[0] - o2[0];
 
+            // 종료시간이 빠른 순으로 정렬
             return o1[1] - o2[1];
         });
 
