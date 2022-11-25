@@ -1,6 +1,5 @@
 package baekjoon.그리디.카드정렬하기;
 
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
