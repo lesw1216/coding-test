@@ -1,8 +1,6 @@
 package baekjoon.그리디.보석도둑;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 /*
     N개의 보석
@@ -12,61 +10,57 @@ import java.util.Scanner;
     최대 가격 구하기
  */
 public class Main {
+    static class Jewelry {
+        int weight;
+        int price;
+
+        public Jewelry(int weight, int price) {
+            this.weight = weight;
+            this.price = price;
+        }
+    }
+    public static int jewelryCount;
+    public static int bag;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int K = sc.nextInt();
+        jewelryCount = sc.nextInt();
+        bag = sc.nextInt();
 
-        int[][] list = new int[N][2];
-        LinkedList<ArrayList<Integer>> aList = new LinkedList<>();
-
-//        for (int i = 0; i < N; i++) {
-//            list[i][0] = sc.nextInt();
-//            list[i][1] = sc.nextInt();
-//        }
-
-        for (int i = 0; i < N; i++) {
-            ArrayList<Integer> temp = new ArrayList<>();
-            temp.add(sc.nextInt());
-            temp.add(sc.nextInt());
-
-            aList.add(temp);
+        ArrayList<Jewelry> list = new ArrayList<>();
+        for (int i = 0; i < jewelryCount; i++) {
+            Jewelry temp = new Jewelry(sc.nextInt(), sc.nextInt());
+            list.add(temp);
         }
 
-        int[] bagSize = new int[K];
-        for (int i = 0; i < K; i++) {
-            bagSize[i] = sc.nextInt();
+        list.sort(Comparator.comparingInt(o -> o.weight));
+
+        ArrayList<Integer> bagList = new ArrayList<>();
+        for (int j = 0; j < bag; j++) {
+            bagList.add(sc.nextInt());
         }
 
-        int max = 0;
-        int sum = 0;
-        int maxIndex = -1;
-//        for (int i = 0; i < K; i++) {
-//            for (int j = 0; j < N; j++) {
-//                if (list[j][0] <= bagSize[i]) {
-//                    max = Math.max(max, list[j][1]);
-//                    maxIndex = j;
-//                }
-//            }
-//            sum += max;
-//            max = 0;
-//
-//        }
+        Collections.sort(bagList);
 
-        for (int i = 0; i < K; i++) {
-            for (int j = 0; j < aList.size(); j++) {
-                ArrayList<Integer> temp = aList.get(j);
-                if (temp.get(0) <= bagSize[i]) {
-                    max = Math.max(max, temp.get(1));
-                    maxIndex = j;
+        long result = 0L;
+        int index = 0;
+        PriorityQueue<Integer> priceMinList = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        for (int bag : bagList) {
+            for (int j = index; j < jewelryCount; j++) {
+                if (bag >= list.get(j).weight) {
+                    priceMinList.add(list.get(j).price);
+                    index++;
+                } else {
+                    break;
                 }
             }
 
-            sum += max;
-            max = 0;
-            aList.remove(maxIndex);
+            if (!priceMinList.isEmpty())
+                result += priceMinList.poll();
         }
 
-        System.out.println(sum);
+        System.out.println(result);
     }
 }
+
+
